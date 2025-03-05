@@ -45,6 +45,7 @@ const Dashboard = () => {
           initial={{ width: isSidebarOpen ? 240 : 80 }}
           animate={{ width: isSidebarOpen ? 240 : 80 }}
           exit={{ width: 80 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
           className="h-full bg-[#1E293B]/50 backdrop-blur-xl border-r border-[#76EAD7]/10 flex flex-col relative"
         >
           {/* Logo */}
@@ -52,6 +53,7 @@ const Dashboard = () => {
             <motion.div
               initial={{ opacity: isSidebarOpen ? 1 : 0 }}
               animate={{ opacity: isSidebarOpen ? 1 : 0 }}
+              transition={{ duration: 0.2 }}
               className="text-2xl font-bold gradient-text"
             >
               carbonX
@@ -81,38 +83,44 @@ const Dashboard = () => {
           {/* Navigation Links */}
           <div className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
             {sidebarLinks.map((link) => (
-              <motion.button
+              <motion.div
                 key={link.name}
-                onClick={() => setSelectedTab(link.name.toLowerCase())}
-                className={`w-full flex items-center px-4 py-3 rounded-xl transition-all duration-300
-                  ${selectedTab === link.name.toLowerCase()
-                    ? 'bg-gradient-to-r from-[#76EAD7]/20 to-[#C4FB6D]/20 text-white'
-                    : 'text-[#94A3B8] hover:text-white hover:bg-white/5'
-                  }`}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className="w-full"
+                initial={false}
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <motion.button
+                  onClick={() => setSelectedTab(link.name.toLowerCase())}
+                  className={`w-full flex items-center px-4 py-3 rounded-xl transition-all duration-300
+                    ${selectedTab === link.name.toLowerCase()
+                      ? 'bg-gradient-to-r from-[#76EAD7]/20 to-[#C4FB6D]/20 text-white'
+                      : 'text-[#94A3B8] hover:text-white hover:bg-white/5'
+                    }`}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={link.icon} />
-                </svg>
-                <AnimatePresence>
-                  {isSidebarOpen && (
-                    <motion.span
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -10 }}
-                      className="ml-4 font-medium"
+                  <div className="w-5 h-5 flex items-center justify-center">
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
                     >
-                      {link.name}
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </motion.button>
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={link.icon} />
+                    </svg>
+                  </div>
+                  <motion.div
+                    initial={{ opacity: 1, width: 'auto' }}
+                    animate={{ 
+                      opacity: isSidebarOpen ? 1 : 0,
+                      width: isSidebarOpen ? 'auto' : 0
+                    }}
+                    transition={{ duration: 0.2 }}
+                    className="ml-4 font-medium overflow-hidden whitespace-nowrap"
+                  >
+                    {link.name}
+                  </motion.div>
+                </motion.button>
+              </motion.div>
             ))}
           </div>
         </motion.div>
