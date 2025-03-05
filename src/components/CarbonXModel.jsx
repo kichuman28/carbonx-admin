@@ -22,6 +22,12 @@ export function CarbonXModel({ modelPath, posterPath }) {
       modelViewer.addEventListener('load', handleLoad);
       modelViewer.addEventListener('error', handleError);
       modelViewer.addEventListener('dblclick', preventDoubleClick);
+
+      // Add interaction change handler
+      modelViewer.addEventListener('camera-change', () => {
+        // Reset auto-rotation delay to 0 for immediate resumption
+        modelViewer.autoRotateDelay = 0;
+      });
     }
 
     return () => {
@@ -40,6 +46,7 @@ export function CarbonXModel({ modelPath, posterPath }) {
         poster={posterPath}
         auto-rotate
         rotation-per-second="30deg"
+        auto-rotate-delay="0"
         interaction-prompt="none"
         camera-orbit="0deg 75deg 105%"
         min-camera-orbit="auto auto 105%"
@@ -48,7 +55,10 @@ export function CarbonXModel({ modelPath, posterPath }) {
         touch-action="pan-y"
         disable-zoom
         disable-tap
-        interpolation-decay="0"
+        interpolation-decay="0.9"
+        orbit-sensitivity="1"
+        camera-target="0m 0m 0m"
+        interaction-policy="allow-when-focused"
         environment-image="neutral"
         skybox-image=""
         shadow-intensity="0"
@@ -80,6 +90,9 @@ export function CarbonXModel({ modelPath, posterPath }) {
           background-color: transparent;
           --interaction-prompt-threshold: 0;
           --interaction-prompt: none;
+          --min-field-of-view: 10deg;
+          --max-field-of-view: 90deg;
+          --interpolation-speed: 100;
         }
 
         model-viewer::part(default-progress-bar) {
