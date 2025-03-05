@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-light: #EEEEEE;
+  --primary-dark: #393E46;
+  --accent-teal: #76EAD7;
+  --accent-lime: #C4FB6D;
+}
+
+body {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, var(--accent-teal), var(--accent-lime));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.btn-primary {
+  @apply px-6 py-2 rounded-full font-semibold transition-all duration-300;
+  background: linear-gradient(45deg, var(--accent-teal), var(--accent-lime));
+}
+
+.btn-primary:hover {
+  @apply transform scale-105 shadow-lg;
+}
+
+.btn-secondary {
+  @apply px-6 py-2 rounded-full font-semibold border-2 transition-all duration-300;
+  border-color: var(--accent-teal);
+  color: var(--accent-teal);
+}
+
+.btn-secondary:hover {
+  @apply transform scale-105 shadow-lg;
+  background-color: var(--accent-teal);
+  color: white;
+}
