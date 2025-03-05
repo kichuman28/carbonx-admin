@@ -7,17 +7,17 @@ import { Suspense } from 'react';
 
 const Landing = () => {
   return (
-    <div className="min-h-screen pt-16 bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0F172A] relative overflow-hidden">
+    <div className="min-h-screen pt-12 sm:pt-16 bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0F172A] relative overflow-hidden">
       {/* Enhanced Animated Background */}
       <div className="animated-bg">
-        {/* Primary blob */}
+        {/* Primary blob - Adjusted for mobile */}
         <motion.div
           className="animated-blob"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.4, 0.3],
-            x: [0, 100, 0],
-            y: [0, -50, 0],
+            x: [0, 50, 0],
+            y: [0, -25, 0],
           }}
           transition={{
             duration: 20,
@@ -27,21 +27,21 @@ const Landing = () => {
           style={{
             top: '20%',
             left: '10%',
-            width: '800px',
-            height: '800px',
+            width: 'min(800px, 100vw)',
+            height: 'min(800px, 100vh)',
             background: 'radial-gradient(circle at center, rgba(118, 234, 215, 0.2), rgba(196, 251, 109, 0.1))',
             borderRadius: '50%',
             filter: 'blur(60px)',
           }}
         />
-        {/* Secondary blob */}
+        {/* Secondary blob - Adjusted for mobile */}
         <motion.div
           className="animated-blob"
           animate={{
             scale: [1, 1.3, 1],
             opacity: [0.2, 0.3, 0.2],
-            x: [0, -70, 0],
-            y: [0, 100, 0],
+            x: [0, -35, 0],
+            y: [0, 50, 0],
           }}
           transition={{
             duration: 25,
@@ -51,16 +51,16 @@ const Landing = () => {
           style={{
             top: '60%',
             right: '15%',
-            width: '700px',
-            height: '700px',
+            width: 'min(700px, 90vw)',
+            height: 'min(700px, 90vh)',
             background: 'radial-gradient(circle at center, rgba(118, 234, 215, 0.15), rgba(196, 251, 109, 0.05))',
             borderRadius: '50%',
             filter: 'blur(60px)',
           }}
         />
-        {/* Additional accent blobs */}
+        {/* Additional accent blobs - Adjusted for mobile */}
         <motion.div
-          className="animated-blob"
+          className="animated-blob hidden sm:block"
           animate={{
             scale: [1, 1.4, 1],
             opacity: [0.1, 0.2, 0.1],
@@ -73,15 +73,15 @@ const Landing = () => {
           style={{
             top: '30%',
             right: '30%',
-            width: '400px',
-            height: '400px',
+            width: 'min(400px, 50vw)',
+            height: 'min(400px, 50vh)',
             background: 'radial-gradient(circle at center, rgba(196, 251, 109, 0.15), rgba(118, 234, 215, 0.05))',
             borderRadius: '50%',
             filter: 'blur(40px)',
           }}
         />
         <motion.div
-          className="animated-blob"
+          className="animated-blob hidden sm:block"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.15, 0.25, 0.15],
@@ -95,8 +95,8 @@ const Landing = () => {
           style={{
             bottom: '20%',
             left: '30%',
-            width: '300px',
-            height: '300px',
+            width: 'min(300px, 40vw)',
+            height: 'min(300px, 40vh)',
             background: 'radial-gradient(circle at center, rgba(118, 234, 215, 0.2), rgba(196, 251, 109, 0.05))',
             borderRadius: '50%',
             filter: 'blur(40px)',
@@ -106,30 +106,30 @@ const Landing = () => {
 
       {/* Hero Section */}
       <section className="relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-8 pb-8 sm:pb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 items-center">
             {/* Left side - Text Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="text-left lg:pt-0 pt-8 relative"
+              className="text-left pt-4 sm:pt-8 lg:pt-0 relative order-2 lg:order-1"
             >
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: "100px" }}
                 transition={{ duration: 1, delay: 0.2 }}
-                className="h-1 bg-gradient-to-r from-[#76EAD7] via-[#C4FB6D] to-transparent mb-8"
+                className="h-1 bg-gradient-to-r from-[#76EAD7] via-[#C4FB6D] to-transparent mb-4 sm:mb-8"
               />
               <motion.h1 
-                className="text-6xl md:text-7xl font-bold mb-6 text-white leading-tight"
+                className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 text-white leading-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
               >
                 The Future of
                 <motion.span 
-                  className="gradient-text block mt-2"
+                  className="gradient-text block mt-1 sm:mt-2"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -137,7 +137,7 @@ const Landing = () => {
                 </motion.span>
               </motion.h1>
               <motion.p 
-                className="text-lg md:text-xl text-[#94A3B8] mb-12 max-w-xl leading-relaxed"
+                className="text-base sm:text-lg md:text-xl text-[#94A3B8] mb-6 sm:mb-12 max-w-xl leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
@@ -146,28 +146,22 @@ const Landing = () => {
                 a real impact on climate change with blockchain technology.
               </motion.p>
               <motion.div
-                className="flex flex-col sm:flex-row gap-6"
+                className="flex flex-col sm:flex-row gap-4 sm:gap-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
               >
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link to="/dashboard" className="btn-primary">
+                  <Link to="/dashboard" className="btn-primary w-full sm:w-auto text-center">
                     Get Started
                   </Link>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <a href="#learn-more" className="btn-secondary">
+                  <a href="#learn-more" className="btn-secondary w-full sm:w-auto text-center">
                     Learn More
                   </a>
                 </motion.div>
               </motion.div>
-              <motion.div
-                initial={{ height: 0 }}
-                animate={{ height: "100px" }}
-                transition={{ duration: 1, delay: 0.8 }}
-                className="w-1 bg-gradient-to-b from-[#76EAD7] to-transparent absolute right-0 top-1/2 transform -translate-y-1/2 hidden lg:block"
-              />
             </motion.div>
 
             {/* Right side - 3D Model */}
@@ -175,7 +169,7 @@ const Landing = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1 }}
-              className="h-[500px] relative model-container"
+              className="h-[300px] sm:h-[400px] md:h-[500px] relative model-container order-1 lg:order-2"
             >
               <div className="absolute inset-0">
                 <Suspense fallback={
@@ -245,9 +239,9 @@ const Landing = () => {
       </section>
 
       {/* Features Section */}
-      <section id="learn-more" className="py-20 relative">
+      <section id="learn-more" className="py-12 sm:py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -268,8 +262,8 @@ const Landing = () => {
                 >
                   {feature.icon}
                 </motion.div>
-                <h3 className="text-xl font-semibold mb-2 text-white">{feature.title}</h3>
-                <p className="text-[#94A3B8]">{feature.description}</p>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-white">{feature.title}</h3>
+                <p className="text-sm sm:text-base text-[#94A3B8]">{feature.description}</p>
               </motion.div>
             ))}
           </div>
