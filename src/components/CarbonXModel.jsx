@@ -13,15 +13,22 @@ export function CarbonXModel({ modelPath, posterPath }) {
       console.error('Error loading model:', error);
     };
 
+    // Disable double-click zoom behavior
+    const preventDoubleClick = (e) => {
+      e.preventDefault();
+    };
+
     if (modelViewer) {
       modelViewer.addEventListener('load', handleLoad);
       modelViewer.addEventListener('error', handleError);
+      modelViewer.addEventListener('dblclick', preventDoubleClick);
     }
 
     return () => {
       if (modelViewer) {
         modelViewer.removeEventListener('load', handleLoad);
         modelViewer.removeEventListener('error', handleError);
+        modelViewer.removeEventListener('dblclick', preventDoubleClick);
       }
     };
   }, []);
@@ -31,35 +38,31 @@ export function CarbonXModel({ modelPath, posterPath }) {
       <model-viewer
         src={modelPath}
         poster={posterPath}
-        ar
-        ar-modes="webxr scene-viewer quick-look"
-        camera-controls
         auto-rotate
-        rotation-per-second="15deg"
+        rotation-per-second="30deg"
         interaction-prompt="none"
         camera-orbit="0deg 75deg 105%"
-        min-camera-orbit="auto auto 50%"
-        max-camera-orbit="auto auto 200%"
+        min-camera-orbit="auto auto 105%"
+        max-camera-orbit="auto auto 105%"
+        camera-controls="auto"
+        touch-action="pan-y"
+        disable-zoom
+        disable-tap
+        interpolation-decay="0"
         environment-image="neutral"
         skybox-image=""
         shadow-intensity="0"
         exposure="1"
-        disable-zoom
         style={{
           width: '100%',
           height: '100%',
           background: 'transparent',
-          '--poster-color': 'transparent'
+          '--poster-color': 'transparent',
+          cursor: 'move'
         }}
       >
         <div className="progress-bar hide" slot="progress-bar">
           <div className="update-bar"></div>
-        </div>
-        <button slot="ar-button" id="ar-button" className="ar-button">
-          View in your space
-        </button>
-        <div id="ar-prompt">
-          <img src="https://modelviewer.dev/shared-assets/icons/hand.png" alt="AR prompt" />
         </div>
       </model-viewer>
 
@@ -75,6 +78,12 @@ export function CarbonXModel({ modelPath, posterPath }) {
           --progress-mask: linear-gradient(to right, transparent 0%, #000 50%, transparent 100%);
           --poster-color: transparent;
           background-color: transparent;
+          --interaction-prompt-threshold: 0;
+          --interaction-prompt: none;
+        }
+
+        model-viewer::part(default-progress-bar) {
+          display: none;
         }
 
         .progress-bar {
@@ -102,47 +111,6 @@ export function CarbonXModel({ modelPath, posterPath }) {
         @keyframes update-progress {
           0% { transform: scaleX(0); }
           100% { transform: scaleX(1); }
-        }
-
-        .ar-button {
-          background-color: #1E293B;
-          border: 2px solid #76EAD7;
-          border-radius: 12px;
-          color: white;
-          padding: 8px 16px;
-          font-weight: 600;
-          font-size: 14px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          position: absolute;
-          bottom: 16px;
-          right: 16px;
-          z-index: 10;
-        }
-
-        .ar-button:hover {
-          background-color: #76EAD7;
-          color: #1E293B;
-          transform: scale(1.05);
-        }
-
-        #ar-prompt {
-          position: absolute;
-          left: 50%;
-          bottom: 175px;
-          transform: translateX(-50%);
-          text-align: center;
-          background-color: #1E293B;
-          border-radius: 12px;
-          border: 2px solid #76EAD7;
-          padding: 8px;
-          display: none;
-        }
-
-        #ar-prompt img {
-          width: 32px;
-          height: 32px;
-          margin: 0 auto;
         }
       `}</style>
     </div>
