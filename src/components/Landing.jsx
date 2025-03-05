@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, PerspectiveCamera, Environment, ContactShadows } from '@react-three/drei';
+import { CarbonXModel } from './CarbonXModel';
+import { Suspense } from 'react';
 
 const Landing = () => {
   return (
@@ -7,38 +11,92 @@ const Landing = () => {
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-          <div className="text-center">
-            <motion.h1 
-              className="text-5xl md:text-7xl font-bold mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              Decentralized
-              <span className="gradient-text"> Carbon Credit </span>
-              Ecosystem
-            </motion.h1>
-            <motion.p 
-              className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              Making carbon credits accessible to everyone through blockchain technology.
-              Trade, track, and make a real impact on climate change.
-            </motion.p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left side - Text Content */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-left"
             >
-              <Link to="/dashboard" className="btn-primary text-white">
-                Get Started
-              </Link>
-              <a href="#learn-more" className="btn-secondary">
-                Learn More
-              </a>
+              <h1 className="text-5xl md:text-7xl font-bold mb-6">
+                The Future of
+                <span className="gradient-text block mt-2">Carbon Credits</span>
+              </h1>
+              <motion.p 
+                className="text-lg md:text-xl text-gray-600 mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                Join the revolution in sustainable finance. Trade, track, and make 
+                a real impact on climate change with blockchain technology.
+              </motion.p>
+              <motion.div
+                className="flex flex-col sm:flex-row gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <Link to="/dashboard" className="btn-primary text-white">
+                  Get Started
+                </Link>
+                <a href="#learn-more" className="btn-secondary">
+                  Learn More
+                </a>
+              </motion.div>
+            </motion.div>
+
+            {/* Right side - 3D Model */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1 }}
+              className="h-[600px] relative"
+            >
+              <div className="absolute inset-0">
+                <Suspense fallback={<div className="text-center">Loading 3D Model...</div>}>
+                  <Canvas
+                    camera={{ position: [0, 0, 5], fov: 45 }}
+                    style={{ background: 'transparent' }}
+                    gl={{
+                      antialias: true,
+                      powerPreference: "high-performance",
+                      failIfMajorPerformanceCaveat: true,
+                      preserveDrawingBuffer: true
+                    }}
+                    dpr={[1, 2]}
+                    performance={{ min: 0.5 }}
+                  >
+                    <ambientLight intensity={0.5} />
+                    <directionalLight 
+                      position={[5, 5, 5]} 
+                      intensity={0.8} 
+                      castShadow
+                    />
+                    <Suspense fallback={null}>
+                      <CarbonXModel modelPath="/x.glb" />
+                      <Environment preset="city" />
+                    </Suspense>
+                    <ContactShadows
+                      opacity={0.4}
+                      scale={10}
+                      blur={2}
+                      far={4}
+                      resolution={256}
+                      color="#000000"
+                    />
+                    <OrbitControls
+                      enablePan={false}
+                      enableZoom={false}
+                      minPolarAngle={Math.PI / 2}
+                      maxPolarAngle={Math.PI / 2}
+                      autoRotate
+                      autoRotateSpeed={2}
+                    />
+                  </Canvas>
+                </Suspense>
+              </div>
             </motion.div>
           </div>
         </div>
