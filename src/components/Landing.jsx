@@ -7,9 +7,10 @@ import { Suspense } from 'react';
 
 const Landing = () => {
   return (
-    <div className="min-h-screen pt-16 bg-gradient-to-b from-[#0F172A] to-[#1E293B] relative overflow-hidden">
-      {/* Animated Background */}
+    <div className="min-h-screen pt-16 bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0F172A] relative overflow-hidden">
+      {/* Enhanced Animated Background */}
       <div className="animated-bg">
+        {/* Primary blob */}
         <motion.div
           className="animated-blob"
           animate={{
@@ -28,10 +29,12 @@ const Landing = () => {
             left: '10%',
             width: '800px',
             height: '800px',
-            background: 'radial-gradient(circle at center, rgba(118, 234, 215, 0.15), rgba(196, 251, 109, 0.08))',
+            background: 'radial-gradient(circle at center, rgba(118, 234, 215, 0.2), rgba(196, 251, 109, 0.1))',
             borderRadius: '50%',
+            filter: 'blur(60px)',
           }}
         />
+        {/* Secondary blob */}
         <motion.div
           className="animated-blob"
           animate={{
@@ -50,8 +53,53 @@ const Landing = () => {
             right: '15%',
             width: '700px',
             height: '700px',
-            background: 'radial-gradient(circle at center, rgba(118, 234, 215, 0.12), rgba(196, 251, 109, 0.04))',
+            background: 'radial-gradient(circle at center, rgba(118, 234, 215, 0.15), rgba(196, 251, 109, 0.05))',
             borderRadius: '50%',
+            filter: 'blur(60px)',
+          }}
+        />
+        {/* Additional accent blobs */}
+        <motion.div
+          className="animated-blob"
+          animate={{
+            scale: [1, 1.4, 1],
+            opacity: [0.1, 0.2, 0.1],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          style={{
+            top: '30%',
+            right: '30%',
+            width: '400px',
+            height: '400px',
+            background: 'radial-gradient(circle at center, rgba(196, 251, 109, 0.15), rgba(118, 234, 215, 0.05))',
+            borderRadius: '50%',
+            filter: 'blur(40px)',
+          }}
+        />
+        <motion.div
+          className="animated-blob"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.15, 0.25, 0.15],
+            y: [0, -30, 0],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          style={{
+            bottom: '20%',
+            left: '30%',
+            width: '300px',
+            height: '300px',
+            background: 'radial-gradient(circle at center, rgba(118, 234, 215, 0.2), rgba(196, 251, 109, 0.05))',
+            borderRadius: '50%',
+            filter: 'blur(40px)',
           }}
         />
       </div>
