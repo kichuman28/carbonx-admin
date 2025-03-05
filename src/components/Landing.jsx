@@ -10,14 +10,14 @@ const Landing = () => {
     <div className="min-h-screen pt-16 bg-gradient-to-b from-[#EEEEEE] to-white">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left side - Text Content */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-left"
+              className="text-left lg:pt-0 pt-8"
             >
               <h1 className="text-5xl md:text-7xl font-bold mb-6">
                 The Future of
@@ -52,7 +52,7 @@ const Landing = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1 }}
-              className="h-[600px] relative"
+              className="h-[500px] relative"
             >
               <div className="absolute inset-0">
                 <Suspense fallback={<div className="text-center">Loading 3D Model...</div>}>
@@ -89,8 +89,8 @@ const Landing = () => {
                     <OrbitControls
                       enablePan={false}
                       enableZoom={false}
-                      minPolarAngle={Math.PI / 2}
-                      maxPolarAngle={Math.PI / 2}
+                      minPolarAngle={0}
+                      maxPolarAngle={Math.PI}
                       autoRotate
                       autoRotateSpeed={2}
                     />

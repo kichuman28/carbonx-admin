@@ -29,15 +29,17 @@ export function CarbonXModel({ modelPath }) {
     if (ref.current) {
       // Smoother rotation
       ref.current.rotation.y = state.clock.elapsedTime * 0.2;
-      ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.05;
+      // Add slight tilt animation
+      ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.1;
+      ref.current.rotation.z = Math.cos(state.clock.elapsedTime * 0.2) * 0.05;
     }
   });
 
   return (
     <group 
       ref={ref}
-      scale={1.5}
-      position={[0, -0.5, 0]}
+      scale={2.5}
+      position={[0, 0, 0]}
     />
   );
 }
