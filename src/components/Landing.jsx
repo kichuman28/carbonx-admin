@@ -184,7 +184,7 @@ const Landing = () => {
                   whileHover={{ scale: 1.05 }} 
                   whileTap={{ scale: 0.95 }}
                 >
-                  <a href="#learn-more" className="btn-secondary w-full sm:w-auto text-center relative z-10
+                  <a href="#learn-more" onClick={(e) => { e.preventDefault(); document.getElementById('learn-more').scrollIntoView({ behavior: 'smooth' }); }} className="btn-secondary w-full sm:w-auto text-center relative z-10
                     px-8 py-3 rounded-lg border-2 border-[#76EAD7] text-white font-semibold
                     transition-all duration-300 bg-[#0F172A]/80 backdrop-blur-sm
                     hover:bg-gradient-to-r hover:from-[#76EAD7]/20 hover:to-[#C4FB6D]/20
