@@ -3,12 +3,10 @@ import Navbar from './components/Navbar';
 import Landing from './components/Landing';
 import Dashboard from './components/Dashboard';
 import DashboardLayout from './components/layouts/DashboardLayout';
-
-// Create placeholder components for other dashboard pages
-const CarbonPools = () => <div>Carbon Pools Page (Coming Soon)</div>;
-const Explorer = () => <div>Explorer Page (Coming Soon)</div>;
-const CrossChain = () => <div>Cross-Chain Page (Coming Soon)</div>;
-const Retirements = () => <div>Retirements Page (Coming Soon)</div>;
+import CarbonPools from './pages/carbon_pools';
+import Explorer from './pages/explorer';
+import CrossChain from './pages/cross_chain';
+import Retirements from './pages/retirements';
 
 const AppContent = () => {
   const location = useLocation();
