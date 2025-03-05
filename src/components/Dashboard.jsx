@@ -45,10 +45,10 @@ const Dashboard = () => {
           initial={{ width: isSidebarOpen ? 240 : 80 }}
           animate={{ width: isSidebarOpen ? 240 : 80 }}
           exit={{ width: 80 }}
-          className="h-full bg-[#1E293B]/50 backdrop-blur-xl border-r border-[#76EAD7]/10 flex flex-col"
+          className="h-full bg-[#1E293B]/50 backdrop-blur-xl border-r border-[#76EAD7]/10 flex flex-col relative"
         >
           {/* Logo */}
-          <div className="p-6 flex items-center justify-between">
+          <div className={`p-6 flex items-center ${isSidebarOpen ? 'justify-between' : 'justify-center'}`}>
             <motion.div
               initial={{ opacity: isSidebarOpen ? 1 : 0 }}
               animate={{ opacity: isSidebarOpen ? 1 : 0 }}
@@ -56,25 +56,27 @@ const Dashboard = () => {
             >
               carbonX
             </motion.div>
-            <button
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="p-2 rounded-lg hover:bg-[#76EAD7]/10 text-[#76EAD7]"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d={isSidebarOpen ? "M11 19l-7-7 7-7m8 14l-7-7 7-7" : "M13 5l7 7-7 7M5 5l7 7-7 7"}
-                />
-              </svg>
-            </button>
           </div>
+
+          {/* Toggle Button */}
+          <button
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="absolute -right-3 top-9 p-1.5 rounded-full bg-[#1E293B] border border-[#76EAD7]/20 text-[#76EAD7] hover:bg-[#76EAD7]/10 transition-colors duration-300"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d={isSidebarOpen ? "M15 19l-7-7 7-7" : "M9 5l7 7-7 7"}
+              />
+            </svg>
+          </button>
 
           {/* Navigation Links */}
           <div className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
