@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Environment, ContactShadows } from '@react-three/drei';
 import { CarbonXModel } from './CarbonXModel';
 import { Suspense } from 'react';
 
@@ -213,55 +211,10 @@ const Landing = () => {
                     Loading 3D Model...
                   </motion.div>
                 }>
-                  <Canvas
-                    camera={{ position: [0, 0, 5], fov: 45 }}
-                    style={{ background: 'transparent' }}
-                    gl={{
-                      antialias: true,
-                      powerPreference: "high-performance",
-                      failIfMajorPerformanceCaveat: true,
-                      preserveDrawingBuffer: true
-                    }}
-                    dpr={[1, 2]}
-                    performance={{ min: 0.5 }}
-                  >
-                    <ambientLight intensity={0.4} />
-                    <directionalLight 
-                      position={[5, 5, 5]} 
-                      intensity={0.8}
-                      castShadow
-                    />
-                    <pointLight
-                      position={[-10, -10, -10]}
-                      color="#76EAD7"
-                      intensity={0.3}
-                    />
-                    <pointLight
-                      position={[10, 10, 10]}
-                      color="#C4FB6D"
-                      intensity={0.2}
-                    />
-                    <Suspense fallback={null}>
-                      <CarbonXModel modelPath="/x.glb" />
-                      <Environment preset="night" />
-                    </Suspense>
-                    <ContactShadows
-                      opacity={0.3}
-                      scale={12}
-                      blur={3}
-                      far={4.5}
-                      resolution={256}
-                      color="#000000"
-                    />
-                    <OrbitControls
-                      enablePan={false}
-                      enableZoom={false}
-                      minPolarAngle={0}
-                      maxPolarAngle={Math.PI}
-                      autoRotate
-                      autoRotateSpeed={2}
-                    />
-                  </Canvas>
+                  <CarbonXModel 
+                    modelPath="/x.glb"
+                    posterPath="/poster.webp"
+                  />
                 </Suspense>
               </div>
             </motion.div>
