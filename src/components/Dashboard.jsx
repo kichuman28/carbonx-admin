@@ -1,7 +1,9 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [selectedTab, setSelectedTab] = useState('overview');
 
   const stats = [
@@ -27,119 +29,141 @@ const Dashboard = () => {
     }
   ];
 
+  const sidebarLinks = [
+    { name: 'Overview', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
+    { name: 'Carbon Pools', icon: 'M13 10V3L4 14h7v7l9-11h-7z' },
+    { name: 'Explorer', icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' },
+    { name: 'Cross-Chain', icon: 'M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4' },
+    { name: 'Retirements', icon: 'M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16' },
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0F172A] to-[#1E293B] pt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Dashboard Header */}
-        <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
-            Welcome to Your Dashboard
-          </h1>
-          <p className="text-sm sm:text-base text-[#94A3B8]">
-            Monitor your carbon credits and impact on the environment
-          </p>
-        </div>
-
-        {/* Dashboard Tabs */}
-        <div className="flex flex-wrap gap-2 mb-8 overflow-x-auto pb-2">
-          {['overview', 'transactions', 'portfolio', 'impact'].map((tab) => (
-            <motion.button
-              key={tab}
-              onClick={() => setSelectedTab(tab)}
-              className={`px-4 py-2 rounded-full text-sm sm:text-base capitalize whitespace-nowrap
-                ${selectedTab === tab
-                  ? 'bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] text-[#0F172A] font-semibold'
-                  : 'text-[#94A3B8] hover:text-white bg-white/5 hover:bg-white/10'
-                }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+    <div className="flex h-screen bg-[#0F172A] overflow-hidden">
+      {/* Sidebar */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          initial={{ width: isSidebarOpen ? 240 : 80 }}
+          animate={{ width: isSidebarOpen ? 240 : 80 }}
+          exit={{ width: 80 }}
+          className="h-full bg-[#1E293B]/50 backdrop-blur-xl border-r border-[#76EAD7]/10 flex flex-col"
+        >
+          {/* Logo */}
+          <div className="p-6 flex items-center justify-between">
+            <motion.div
+              initial={{ opacity: isSidebarOpen ? 1 : 0 }}
+              animate={{ opacity: isSidebarOpen ? 1 : 0 }}
+              className="text-2xl font-bold gradient-text"
             >
-              {tab}
-            </motion.button>
-          ))}
-        </div>
+              carbonX
+            </motion.div>
+            <button
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="p-2 rounded-lg hover:bg-[#76EAD7]/10 text-[#76EAD7]"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d={isSidebarOpen ? "M11 19l-7-7 7-7m8 14l-7-7 7-7" : "M13 5l7 7-7 7M5 5l7 7-7 7"}
+                />
+              </svg>
+            </button>
+          </div>
 
-        {/* Dashboard Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Total Credits Card */}
-          <motion.div
-            className="bg-[#1E293B]/50 backdrop-blur-lg rounded-2xl p-6 border border-[#76EAD7]/10"
-            whileHover={{ scale: 1.02 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-sm text-[#94A3B8] mb-1">Total Credits</p>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white">1,234</h3>
-              </div>
-              <div className="p-2 bg-[#76EAD7]/10 rounded-lg">
-                <svg className="w-6 h-6 text-[#76EAD7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          {/* Navigation Links */}
+          <div className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+            {sidebarLinks.map((link) => (
+              <motion.button
+                key={link.name}
+                onClick={() => setSelectedTab(link.name.toLowerCase())}
+                className={`w-full flex items-center px-4 py-3 rounded-xl transition-all duration-300
+                  ${selectedTab === link.name.toLowerCase()
+                    ? 'bg-gradient-to-r from-[#76EAD7]/20 to-[#C4FB6D]/20 text-white'
+                    : 'text-[#94A3B8] hover:text-white hover:bg-white/5'
+                  }`}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={link.icon} />
                 </svg>
-              </div>
-            </div>
-            <div className="mt-4">
-              <span className="text-[#C4FB6D] text-sm font-medium">+12.5%</span>
-              <span className="text-[#94A3B8] text-sm ml-2">from last month</span>
-            </div>
-          </motion.div>
+                <AnimatePresence>
+                  {isSidebarOpen && (
+                    <motion.span
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -10 }}
+                      className="ml-4 font-medium"
+                    >
+                      {link.name}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
+      </AnimatePresence>
 
-          {/* Impact Card */}
-          <motion.div
-            className="bg-[#1E293B]/50 backdrop-blur-lg rounded-2xl p-6 border border-[#76EAD7]/10"
-            whileHover={{ scale: 1.02 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-          >
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-sm text-[#94A3B8] mb-1">CO₂ Offset</p>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white">45.2t</h3>
-              </div>
-              <div className="p-2 bg-[#C4FB6D]/10 rounded-lg">
-                <svg className="w-6 h-6 text-[#C4FB6D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-            </div>
-            <div className="mt-4">
-              <span className="text-[#C4FB6D] text-sm font-medium">+3.2t</span>
-              <span className="text-[#94A3B8] text-sm ml-2">this week</span>
-            </div>
-          </motion.div>
+      {/* Main Content */}
+      <div className="flex-1 overflow-auto">
+        <div className="p-8">
+          {/* Stats Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.title}
+                className="bg-[#1E293B]/50 backdrop-blur-xl rounded-2xl p-6 border border-[#76EAD7]/10"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ scale: 1.02 }}
+              >
+                <h3 className="text-[#94A3B8] text-sm mb-2">{stat.title}</h3>
+                <div className="flex items-baseline">
+                  <span className="text-2xl font-bold text-white">{stat.value}</span>
+                  <span className="ml-2 text-sm text-[#76EAD7]">{stat.unit}</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
 
-          {/* Value Card */}
-          <motion.div
-            className="bg-[#1E293B]/50 backdrop-blur-lg rounded-2xl p-6 border border-[#76EAD7]/10"
-            whileHover={{ scale: 1.02 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-sm text-[#94A3B8] mb-1">Portfolio Value</p>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white">$24,500</h3>
-              </div>
-              <div className="p-2 bg-[#76EAD7]/10 rounded-lg">
-                <svg className="w-6 h-6 text-[#76EAD7]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+          {/* Pool Information */}
+          <div className="bg-[#1E293B]/50 backdrop-blur-xl rounded-2xl p-6 border border-[#76EAD7]/10 mb-8">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-bold text-white">Toucan Biochar Carbon Pool (CHAR)</h2>
+              <div className="flex items-center space-x-2">
+                <span className="text-3xl font-bold text-white">$147.19</span>
+                <button className="btn-primary">Buy CHAR</button>
               </div>
             </div>
-            <div className="mt-4">
-              <span className="text-[#C4FB6D] text-sm font-medium">+$1,200</span>
-              <span className="text-[#94A3B8] text-sm ml-2">past 24h</span>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-[#94A3B8]">Pool Composition</span>
+                <span className="text-white">Credits deposited into pool: 1,357 TCO2</span>
+              </div>
+              <div className="h-2 bg-[#1E293B] rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] w-3/4"></div>
+              </div>
             </div>
-          </motion.div>
-        </div>
+          </div>
 
-        {/* Recent Activity */}
-        <div className="mt-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">Recent Activity</h2>
-          <div className="bg-[#1E293B]/50 backdrop-blur-lg rounded-2xl border border-[#76EAD7]/10 overflow-hidden">
+          {/* Recent Activity */}
+          <div className="bg-[#1E293B]/50 backdrop-blur-xl rounded-2xl border border-[#76EAD7]/10 overflow-hidden">
+            <div className="p-6 border-b border-[#76EAD7]/10">
+              <h2 className="text-xl font-bold text-white">Recent Activity</h2>
+            </div>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>

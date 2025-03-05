@@ -93,14 +93,6 @@ const Navbar = () => {
                 Get Started
               </Link>
             </motion.div>
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 400 }}
-              className="px-4 py-2 text-sm font-medium text-[#76EAD7] border border-[#76EAD7]/20 rounded-lg hover:bg-[#76EAD7]/10 transition-all duration-300 backdrop-blur-md"
-              onClick={() => console.log('Connect wallet')}
-            >
-              Connect Wallet
-            </motion.button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -162,12 +154,6 @@ const Navbar = () => {
                   >
                     Get Started
                   </Link>
-                  <button
-                    className="block w-full btn-secondary text-center"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Connect Wallet
-                  </button>
                 </div>
               </div>
             </motion.div>
