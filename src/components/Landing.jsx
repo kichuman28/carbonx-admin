@@ -108,7 +108,7 @@ const Landing = () => {
       <section className="relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-8 pb-8 sm:pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 items-center">
-            {/* Left side - Text Content */}
+            {/* Left side - Enhanced Text Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -117,27 +117,35 @@ const Landing = () => {
             >
               <motion.div
                 initial={{ width: 0 }}
-                animate={{ width: "100px" }}
-                transition={{ duration: 1, delay: 0.2 }}
-                className="h-1 bg-gradient-to-r from-[#76EAD7] via-[#C4FB6D] to-transparent mb-4 sm:mb-8"
+                animate={{ width: "150px" }}
+                transition={{ duration: 1.2, delay: 0.2 }}
+                className="h-1.5 bg-gradient-to-r from-[#76EAD7] via-[#C4FB6D] to-transparent mb-4 sm:mb-8 
+                          rounded-full"
               />
               <motion.h1 
-                className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 text-white leading-tight"
+                className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 text-white leading-tight
+                         text-shadow-neon relative z-10"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
               >
-                The Future of
+                <span className="relative inline-block">
+                  The Future of
+                </span>
                 <motion.span 
-                  className="gradient-text block mt-1 sm:mt-2"
-                  whileHover={{ scale: 1.02 }}
+                  className="gradient-text block mt-1 sm:mt-2 relative glow-text"
+                  whileHover={{ 
+                    scale: 1.02,
+                    textShadow: "0 0 15px rgba(118,234,215,0.5), 0 0 30px rgba(196,251,109,0.3)"
+                  }}
                   transition={{ duration: 0.3 }}
                 >
                   Carbon Credits
                 </motion.span>
               </motion.h1>
               <motion.p 
-                className="text-base sm:text-lg md:text-xl text-[#94A3B8] mb-6 sm:mb-12 max-w-xl leading-relaxed"
+                className="text-base sm:text-lg md:text-xl text-[#94A3B8] mb-6 sm:mb-12 max-w-xl leading-relaxed
+                          hover:text-white transition-colors duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
@@ -151,14 +159,37 @@ const Landing = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
               >
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link to="/dashboard" className="btn-primary w-full sm:w-auto text-center">
-                    Get Started
+                <motion.div 
+                  whileHover={{ scale: 1.05 }} 
+                  whileTap={{ scale: 0.95 }}
+                  className="relative group"
+                >
+                  <Link to="/dashboard" className="btn-primary w-full sm:w-auto text-center relative z-10 
+                    px-8 py-3 rounded-lg bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] text-black font-semibold
+                    transition-all duration-300 hover:shadow-[0_0_20px_rgba(118,234,215,0.5)]
+                    before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-r 
+                    before:from-[#C4FB6D] before:to-[#76EAD7] before:opacity-0 before:transition-opacity
+                    before:duration-300 hover:before:opacity-100 before:rounded-lg overflow-hidden">
+                    <span className="relative z-10">Get Started</span>
                   </Link>
                 </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <a href="#learn-more" className="btn-secondary w-full sm:w-auto text-center">
-                    Learn More
+                <motion.div 
+                  whileHover={{ scale: 1.05 }} 
+                  whileTap={{ scale: 0.95 }}
+                  className="relative group"
+                >
+                  <a href="#learn-more" className="btn-secondary w-full sm:w-auto text-center relative z-10
+                    px-8 py-3 rounded-lg border-2 border-[#76EAD7] text-white font-semibold
+                    transition-all duration-300 bg-[#0F172A]/80 backdrop-blur-sm
+                    hover:bg-gradient-to-r hover:from-[#76EAD7]/20 hover:to-[#C4FB6D]/20
+                    hover:border-[#C4FB6D] hover:text-white
+                    hover:shadow-[0_0_20px_rgba(118,234,215,0.3)] overflow-hidden">
+                    <span className="relative z-10 flex items-center justify-center gap-2">
+                      Learn More
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
                   </a>
                 </motion.div>
               </motion.div>
@@ -238,16 +269,19 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Features Section - Enhanced */}
       <section id="learn-more" className="py-12 sm:py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
-                className="feature-card"
+                className="feature-card backdrop-blur-lg bg-white/5 p-6 rounded-xl border border-white/10
+                          hover:border-[#76EAD7]/30 transition-all duration-300
+                          hover:shadow-[0_0_30px_rgba(118,234,215,0.15)]"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -5 }}
                 viewport={{ once: true }}
                 transition={{ 
                   duration: 0.8,
@@ -256,19 +290,51 @@ const Landing = () => {
                 }}
               >
                 <motion.div 
-                  className="feature-icon flex items-center justify-center"
-                  whileHover={{ scale: 1.1, rotate: 360 }}
+                  className="feature-icon flex items-center justify-center w-12 h-12 rounded-lg
+                            bg-gradient-to-br from-[#76EAD7]/20 to-[#C4FB6D]/20 mb-4"
+                  whileHover={{ 
+                    scale: 1.1, 
+                    rotate: 360,
+                    boxShadow: "0 0 20px rgba(118,234,215,0.3)"
+                  }}
                   transition={{ duration: 0.5 }}
                 >
                   {feature.icon}
                 </motion.div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-white">{feature.title}</h3>
-                <p className="text-sm sm:text-base text-[#94A3B8]">{feature.description}</p>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-white
+                             bg-gradient-to-r from-white to-white bg-clip-text hover:text-transparent
+                             transition-all duration-300">{feature.title}</h3>
+                <p className="text-sm sm:text-base text-[#94A3B8] group-hover:text-white
+                            transition-colors duration-300">{feature.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Add global styles */}
+      <style jsx global>{`
+        .text-shadow-neon {
+          text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+        
+        .gradient-text {
+          background: linear-gradient(to right, #76EAD7, #C4FB6D);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          position: relative;
+        }
+        
+        .glow-text {
+          filter: drop-shadow(0 0 15px rgba(118,234,215,0.3));
+        }
+        
+        @keyframes borderGlow {
+          0%, 100% { border-color: rgba(118,234,215,0.3); }
+          50% { border-color: rgba(196,251,109,0.3); }
+        }
+      `}</style>
     </div>
   );
 };
