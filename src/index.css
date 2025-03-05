@@ -5,8 +5,10 @@
 @tailwind utilities;
 
 :root {
-  --primary-light: #EEEEEE;
-  --primary-dark: #393E46;
+  --primary-dark: #0F172A;
+  --secondary-dark: #1E293B;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
   --accent-teal: #76EAD7;
   --accent-lime: #C4FB6D;
 }
@@ -16,8 +18,8 @@ body {
   font-family: 'Manrope', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--primary-light);
-  color: var(--primary-dark);
+  background-color: var(--primary-dark);
+  color: var(--text-primary);
 }
 
 .gradient-text {
@@ -30,10 +32,12 @@ body {
 .btn-primary {
   @apply px-6 py-2 rounded-full font-semibold transition-all duration-300;
   background: linear-gradient(45deg, var(--accent-teal), var(--accent-lime));
+  color: var(--primary-dark);
 }
 
 .btn-primary:hover {
   @apply transform scale-105 shadow-lg;
+  box-shadow: 0 0 20px rgba(118, 234, 215, 0.3);
 }
 
 .btn-secondary {
@@ -43,7 +47,8 @@ body {
 }
 
 .btn-secondary:hover {
-  @apply transform scale-105 shadow-lg;
+  @apply transform scale-105;
   background-color: var(--accent-teal);
-  color: white;
+  color: var(--primary-dark);
+  box-shadow: 0 0 20px rgba(118, 234, 215, 0.3);
 }

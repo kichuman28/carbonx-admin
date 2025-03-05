@@ -7,7 +7,7 @@ import { Suspense } from 'react';
 
 const Landing = () => {
   return (
-    <div className="min-h-screen pt-16 bg-gradient-to-b from-[#EEEEEE] to-white">
+    <div className="min-h-screen pt-16 bg-gradient-to-b from-[#0F172A] to-[#1E293B]">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
@@ -19,12 +19,12 @@ const Landing = () => {
               transition={{ duration: 0.8 }}
               className="text-left lg:pt-0 pt-8"
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
                 The Future of
                 <span className="gradient-text block mt-2">Carbon Credits</span>
               </h1>
               <motion.p 
-                className="text-lg md:text-xl text-gray-600 mb-8"
+                className="text-lg md:text-xl text-[#94A3B8] mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -38,7 +38,7 @@ const Landing = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <Link to="/dashboard" className="btn-primary text-white">
+                <Link to="/dashboard" className="btn-primary">
                   Get Started
                 </Link>
                 <a href="#learn-more" className="btn-secondary">
@@ -55,7 +55,7 @@ const Landing = () => {
               className="h-[500px] relative"
             >
               <div className="absolute inset-0">
-                <Suspense fallback={<div className="text-center">Loading 3D Model...</div>}>
+                <Suspense fallback={<div className="text-center text-[#94A3B8]">Loading 3D Model...</div>}>
                   <Canvas
                     camera={{ position: [0, 0, 5], fov: 45 }}
                     style={{ background: 'transparent' }}
@@ -68,18 +68,23 @@ const Landing = () => {
                     dpr={[1, 2]}
                     performance={{ min: 0.5 }}
                   >
-                    <ambientLight intensity={0.5} />
+                    <ambientLight intensity={0.3} />
                     <directionalLight 
                       position={[5, 5, 5]} 
-                      intensity={0.8} 
+                      intensity={0.5} 
                       castShadow
+                    />
+                    <pointLight
+                      position={[-10, -10, -10]}
+                      color="#76EAD7"
+                      intensity={0.2}
                     />
                     <Suspense fallback={null}>
                       <CarbonXModel modelPath="/x.glb" />
-                      <Environment preset="city" />
+                      <Environment preset="night" />
                     </Suspense>
                     <ContactShadows
-                      opacity={0.4}
+                      opacity={0.2}
                       scale={10}
                       blur={2}
                       far={4}
@@ -103,19 +108,19 @@ const Landing = () => {
 
         {/* Animated Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full -z-10 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-[#76EAD7]/20 rounded-full filter blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#C4FB6D]/20 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-[#76EAD7]/10 rounded-full filter blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#C4FB6D]/10 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="learn-more" className="py-20 bg-white">
+      <section id="learn-more" className="py-20 bg-[#1E293B]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
-                className="p-6 rounded-2xl bg-gradient-to-br from-white to-gray-50 shadow-lg"
+                className="p-6 rounded-2xl bg-gradient-to-br from-[#0F172A] to-[#1E293B] shadow-lg border border-[#76EAD7]/10"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -124,8 +129,8 @@ const Landing = () => {
                 <div className="w-12 h-12 mb-4 rounded-full bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] flex items-center justify-center">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <h3 className="text-xl font-semibold mb-2 text-white">{feature.title}</h3>
+                <p className="text-[#94A3B8]">{feature.description}</p>
               </motion.div>
             ))}
           </div>

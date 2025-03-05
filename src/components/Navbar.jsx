@@ -12,7 +12,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
+    <nav className="fixed w-full top-0 z-50 bg-[#0F172A]/80 backdrop-blur-md border-b border-[#76EAD7]/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -29,7 +29,7 @@ const Navbar = () => {
                 className={`text-sm font-medium transition-colors duration-300 ${
                   location.pathname === link.path
                     ? 'text-[#76EAD7]'
-                    : 'text-gray-700 hover:text-[#76EAD7]'
+                    : 'text-[#94A3B8] hover:text-[#76EAD7]'
                 }`}
               >
                 {link.name}
@@ -37,7 +37,7 @@ const Navbar = () => {
             ))}
             <Link
               to="/dashboard"
-              className="btn-primary text-white"
+              className="btn-primary"
             >
               Get Started
             </Link>
@@ -53,7 +53,7 @@ const Navbar = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-[#76EAD7]"
+              className="inline-flex items-center justify-center p-2 rounded-md text-[#94A3B8] hover:text-[#76EAD7]"
             >
               <svg
                 className="h-6 w-6"
@@ -84,13 +84,13 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="md:hidden">
+        <div className="md:hidden bg-[#1E293B]/95 backdrop-blur-md">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#76EAD7]"
+                className="block px-3 py-2 rounded-md text-base font-medium text-[#94A3B8] hover:text-[#76EAD7]"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.name}
@@ -98,13 +98,13 @@ const Navbar = () => {
             ))}
             <Link
               to="/dashboard"
-              className="block px-3 py-2 rounded-md text-base font-medium text-white bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D]"
+              className="block px-3 py-2 rounded-md text-base font-medium text-[#0F172A] bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D]"
               onClick={() => setIsMenuOpen(false)}
             >
               Get Started
             </Link>
             <button
-              className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-[#76EAD7]"
+              className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-[#94A3B8] hover:text-[#76EAD7]"
               onClick={() => {
                 console.log('Connect wallet');
                 setIsMenuOpen(false);
