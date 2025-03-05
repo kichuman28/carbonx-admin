@@ -27,14 +27,16 @@ const DashboardLayout = ({ children }) => {
         >
           {/* Logo */}
           <div className={`p-6 flex items-center ${isSidebarOpen ? 'justify-between' : 'justify-center'}`}>
-            <motion.div
-              initial={{ opacity: isSidebarOpen ? 1 : 0 }}
-              animate={{ opacity: isSidebarOpen ? 1 : 0 }}
-              transition={{ duration: 0.2 }}
-              className="text-2xl font-bold gradient-text"
-            >
-              carbonX
-            </motion.div>
+            <Link to="/">
+              <motion.div
+                initial={{ opacity: isSidebarOpen ? 1 : 0 }}
+                animate={{ opacity: isSidebarOpen ? 1 : 0 }}
+                transition={{ duration: 0.2 }}
+                className="text-2xl font-bold gradient-text cursor-pointer hover:opacity-80"
+              >
+                carbonX
+              </motion.div>
+            </Link>
           </div>
 
           {/* Toggle Button */}
