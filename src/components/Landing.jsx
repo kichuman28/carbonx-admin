@@ -157,7 +157,8 @@ const Landing = () => {
                 transition={{ delay: 0.2, duration: 0.8 }}
               >
                 <span className="relative inline-block" style={{
-                  textShadow: '0 0 10px rgba(248, 250, 252, 0.5), 0 0 20px rgba(118, 234, 215, 0.3)'
+                  textShadow: '0 0 10px rgba(118, 234, 215, 0.5), 0 0 20px rgba(196, 251, 109, 0.3)',
+                  filter: 'drop-shadow(0 0 8px rgba(118, 234, 215, 0.4))'
                 }}>
                   The Future of
                 </span>
