@@ -211,17 +211,27 @@ const Landing = () => {
                       e.preventDefault(); 
                       document.getElementById('learn-more').scrollIntoView({ behavior: 'smooth' }); 
                     }} 
-                    className="inline-block w-full text-center px-8 py-3 
-                      border-2 border-[#76EAD7] text-white font-semibold rounded-xl
-                      transition-all duration-300 bg-[#0F172A]/80 backdrop-blur-sm
-                      hover:bg-gradient-to-r hover:from-[#76EAD7]/20 hover:to-[#C4FB6D]/20
-                      hover:border-[#C4FB6D] hover:shadow-lg hover:shadow-[#76EAD7]/30">
-                    <span className="flex items-center justify-center gap-2">
-                      Learn More
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    className="relative inline-block overflow-hidden rounded-lg group"
+                  >
+                    {/* Button gradient border */}
+                    <span className="absolute inset-0 bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] animate-gradient-shift"></span>
+                    
+                    {/* Button inner background */}
+                    <span className="absolute inset-[2px] bg-[#0F172A] rounded-lg"></span>
+                    
+                    {/* Button content */}
+                    <div className="relative flex items-center justify-center gap-1.5 pl-6 pr-4 py-3 z-10">
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] font-bold">
+                        Learn More
+                      </span>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#76EAD7] transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
-                    </span>
+                    </div>
+                    
+                    {/* Hover glow effect */}
+                    <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-20 
+                                bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] blur-xl transition-all duration-300"></div>
                   </a>
                 </motion.div>
               </motion.div>
@@ -279,12 +289,13 @@ const Landing = () => {
               transition={{ type: "spring", stiffness: 300 }}
               style={{
                 textShadow: '0 0 10px rgba(118, 234, 215, 0.5), 0 0 20px rgba(196, 251, 109, 0.3)',
-                filter: 'drop-shadow(0 0 8px rgba(118, 234, 215, 0.4))'
+                filter: 'drop-shadow(0 0 8px rgba(118, 234, 215, 0.4))',
+                fontSize: '2.5rem' // Slightly increased the size of the text
               }}>
               <span className="gradient-text">Revolutionizing</span>{' '}
               <span className="text-white">Carbon Markets</span>
             </motion.h2>
-            <p className="text-sm xs:text-base text-[#94A3B8] max-w-xl mx-auto">
+            <p className="text-lg xs:text-xl text-[#94A3B8] max-w-xl mx-auto">
               Our platform offers unique features that make carbon trading more accessible, transparent, and impactful.
             </p>
           </motion.div>
