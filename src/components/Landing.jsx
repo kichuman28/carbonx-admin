@@ -151,7 +151,7 @@ const Landing = () => {
                           rounded-full mx-auto sm:mx-0"
               />
               <motion.h1 
-                className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 text-white leading-tight text-center sm:text-left"
+                className="text-[2.5rem] sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 text-white leading-tight text-center sm:text-left"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
@@ -162,7 +162,7 @@ const Landing = () => {
                   The Future of
                 </span>
                 <motion.span 
-                  className="gradient-text block mt-1 sm:mt-2 relative"
+                  className="gradient-text block mt-0 sm:mt-2 relative" 
                   whileHover={{ 
                     scale: 1.02,
                   }}
@@ -290,14 +290,14 @@ const Landing = () => {
               style={{
                 textShadow: '0 0 10px rgba(118, 234, 215, 0.5), 0 0 20px rgba(196, 251, 109, 0.3)',
                 filter: 'drop-shadow(0 0 8px rgba(118, 234, 215, 0.4))',
-                fontSize: '2.5rem' // Slightly increased the size of the text
+                fontSize: '2.5rem'
               }}>
               <span className="gradient-text">Revolutionizing</span>
               <span className="hidden sm:inline">{' '}</span>
               <span className="block xs:block sm:hidden my-3"></span>
               <span className="text-white">Carbon Markets</span>
             </motion.h2>
-            <p className="text-lg xs:text-xl text-[#94A3B8] max-w-xl mx-auto">
+            <p className="text-lg xs:text-xl text-[#94A3B8] max-w-xl mx-auto mt-8 sm:mt-0">
               Our platform offers unique features that make carbon trading more accessible, transparent, and impactful.
             </p>
           </motion.div>
