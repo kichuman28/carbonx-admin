@@ -176,7 +176,7 @@ const Landing = () => {
                 </motion.span>
               </motion.h1>
               <motion.p 
-                className="text-base sm:text-lg md:text-xl text-[#94A3B8] mb-6 sm:mb-12 max-w-xl leading-relaxed
+                className="text-lg xs:text-xl sm:text-lg md:text-xl text-[#94A3B8] mb-6 sm:mb-12 max-w-xl leading-relaxed
                           hover:text-white transition-colors duration-300 text-center sm:text-left"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
