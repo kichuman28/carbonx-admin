@@ -292,7 +292,9 @@ const Landing = () => {
                 filter: 'drop-shadow(0 0 8px rgba(118, 234, 215, 0.4))',
                 fontSize: '2.5rem' // Slightly increased the size of the text
               }}>
-              <span className="gradient-text">Revolutionizing</span>{' '}
+              <span className="gradient-text">Revolutionizing</span>
+              <span className="hidden sm:inline">{' '}</span>
+              <span className="block xs:block sm:hidden my-3"></span>
               <span className="text-white">Carbon Markets</span>
             </motion.h2>
             <p className="text-lg xs:text-xl text-[#94A3B8] max-w-xl mx-auto">
