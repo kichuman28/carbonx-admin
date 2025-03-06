@@ -143,7 +143,9 @@ const Landing = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
               >
-                <span className="relative inline-block">
+                <span className="relative inline-block" style={{
+                  textShadow: '0 0 10px rgba(248, 250, 252, 0.5), 0 0 20px rgba(118, 234, 215, 0.3)'
+                }}>
                   The Future of
                 </span>
                 <motion.span 
@@ -152,6 +154,9 @@ const Landing = () => {
                     scale: 1.02,
                   }}
                   transition={{ duration: 0.3 }}
+                  style={{
+                    textShadow: '0 0 15px rgba(118, 234, 215, 0.5), 0 0 30px rgba(196, 251, 109, 0.3)'
+                  }}
                 >
                   Carbon Credits
                 </motion.span>
@@ -206,7 +211,7 @@ const Landing = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1 }}
-              className="h-[300px] sm:h-[400px] md:h-[560px] relative model-container order-1 lg:order-2"
+              className="h-[300px] sm:h-[400px] md:h-[560px] relative model-container order-1 lg:order-2 mt-4 sm:mt-6 md:mt-8"
               style={{ 
                 transform: `translateY(${scrollY * -0.05}px)`,
                 transition: 'transform 0.2s ease-out'
@@ -256,11 +261,16 @@ const Landing = () => {
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
-                className="feature-card"
+                className="feature-card-enhanced relative p-8 rounded-2xl 
+                           bg-gradient-to-br from-[#0F172A]/95 via-[#1E293B]/95 to-[#0F172A]/95
+                           backdrop-blur-xl border border-[#76EAD7]/10
+                           hover:border-[#76EAD7]/30 transition-all duration-500
+                           flex flex-col items-center text-center
+                           hover:shadow-[0_8px_32px_rgba(118,234,215,0.2)]"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -271,43 +281,31 @@ const Landing = () => {
                 }}
               >
                 <motion.div 
-                  className="feature-icon flex items-center justify-center"
+                  className="icon-glow relative w-16 h-16 mb-6 flex items-center justify-center"
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.5 }}
                 >
-                  {feature.icon}
+                  <div className="w-full h-full text-[#64ffda] transition-colors duration-300
+                               group-hover:text-[#a8e6cf]">
+                    {feature.icon}
+                  </div>
                 </motion.div>
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 text-white">{feature.title}</h3>
-                <p className="text-sm sm:text-base text-[#94A3B8]">{feature.description}</p>
+                <h3 className="text-2xl font-bold mb-4 text-[#F8FAFC]">{feature.title}</h3>
+                <p className="text-[#94A3B8] text-base leading-relaxed">{feature.description}</p>
+                
+                {/* Enhanced gradient border and glow effects */}
+                <div className="absolute inset-0 rounded-2xl p-[1px] bg-gradient-to-br from-[#64ffda]/20 via-[#a8e6cf]/10 to-[#64ffda]/20 -z-10" />
+                <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-br from-[#64ffda] to-[#a8e6cf] opacity-0 
+                              group-hover:opacity-15 blur-2xl transition-all duration-500 -z-20" />
+                
+                {/* Additional glow effect on hover */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20
+                              bg-[#64ffda] blur-3xl transition-opacity duration-500 -z-30" />
               </motion.div>
             ))}
           </div>
         </div>
         
-        {/* Stats Counter Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20">
-          <motion.div 
-            className="grid grid-cols-2 lg:grid-cols-4 gap-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-md p-6 sm:p-8"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            {stats.map((stat, index) => (
-              <motion.div 
-                key={stat.label}
-                className="text-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-              >
-                <p className="gradient-text text-2xl sm:text-3xl md:text-4xl font-bold">{stat.value}+</p>
-                <p className="text-xs sm:text-sm text-[#94A3B8] mt-2">{stat.label}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
       </section>
 
       {/* Call to Action Section */}
@@ -367,13 +365,6 @@ const features = [
     description: "From individuals to corporations, everyone can participate in carbon credit trading.",
     icon: <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
   }
-];
-
-const stats = [
-  { value: "50K", label: "Active Users" },
-  { value: "2.5M", label: "Carbon Credits Traded" },
-  { value: "120", label: "Projects Supported" },
-  { value: "28", label: "Countries Worldwide" }
 ];
 
 export default Landing; 
