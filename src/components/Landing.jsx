@@ -211,17 +211,17 @@ const Landing = () => {
                       e.preventDefault(); 
                       document.getElementById('learn-more').scrollIntoView({ behavior: 'smooth' }); 
                     }} 
-                    className="relative inline-block overflow-hidden rounded-lg group"
+                    className="relative inline-block w-full sm:w-auto overflow-hidden rounded-xl group"
                   >
                     {/* Button gradient border */}
                     <span className="absolute inset-0 bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] animate-gradient-shift"></span>
                     
                     {/* Button inner background */}
-                    <span className="absolute inset-[2px] bg-[#0F172A] rounded-lg"></span>
+                    <span className="absolute inset-[2px] bg-[#0F172A] rounded-xl"></span>
                     
                     {/* Button content */}
-                    <div className="relative flex items-center justify-center gap-1.5 pl-6 pr-4 py-3 z-10">
-                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] font-bold">
+                    <div className="relative flex items-center justify-center gap-1.5 px-6 py-3 sm:px-6 sm:py-3 z-10">
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] font-semibold">
                         Learn More
                       </span>
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#76EAD7] transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -230,7 +230,7 @@ const Landing = () => {
                     </div>
                     
                     {/* Hover glow effect */}
-                    <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-20 
+                    <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-20 
                                 bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] blur-xl transition-all duration-300"></div>
                   </a>
                 </motion.div>
