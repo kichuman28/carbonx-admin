@@ -5,14 +5,27 @@ import { Suspense, useState, useEffect } from 'react';
 
 const Landing = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
     
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    handleResize();
+    
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (
@@ -180,8 +193,9 @@ const Landing = () => {
                 <motion.div 
                   whileHover={{ scale: 1.05 }} 
                   whileTap={{ scale: 0.95 }}
+                  className="w-full sm:w-auto"
                 >
-                  <Link to="/dashboard" className="inline-block px-8 py-3 bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] 
+                  <Link to="/dashboard" className="inline-block w-full text-center px-8 py-3 bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] 
                     text-[#0F172A] font-semibold rounded-xl hover:shadow-lg 
                     hover:shadow-[#76EAD7]/30 transition-all duration-300">
                     Get Started
@@ -190,13 +204,14 @@ const Landing = () => {
                 <motion.div 
                   whileHover={{ scale: 1.05 }} 
                   whileTap={{ scale: 0.95 }}
+                  className="w-full sm:w-auto"
                 >
                   <a href="#learn-more" 
                     onClick={(e) => { 
                       e.preventDefault(); 
                       document.getElementById('learn-more').scrollIntoView({ behavior: 'smooth' }); 
                     }} 
-                    className="inline-block w-full sm:w-auto text-center px-8 py-3 
+                    className="inline-block w-full text-center px-8 py-3 
                       border-2 border-[#76EAD7] text-white font-semibold rounded-xl
                       transition-all duration-300 bg-[#0F172A]/80 backdrop-blur-sm
                       hover:bg-gradient-to-r hover:from-[#76EAD7]/20 hover:to-[#C4FB6D]/20
@@ -217,7 +232,7 @@ const Landing = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1 }}
-              className="h-[300px] sm:h-[400px] md:h-[560px] relative model-container order-1 lg:order-2 mt-4 sm:mt-6 md:mt-8"
+              className="h-[250px] xs:h-[300px] sm:h-[400px] md:h-[560px] relative model-container order-1 lg:order-2 mt-4 sm:mt-6 md:mt-8"
               style={{ 
                 transform: `translateY(${scrollY * -0.05}px)`,
                 transition: 'transform 0.2s ease-out'
@@ -252,14 +267,14 @@ const Landing = () => {
       <section id="learn-more" className="py-12 sm:py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             <motion.h2 
-              className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4"
+              className="text-2xl xs:text-3xl sm:text-4xl font-bold mb-3 sm:mb-4"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
               style={{
@@ -269,16 +284,16 @@ const Landing = () => {
               <span className="gradient-text">Revolutionizing</span>{' '}
               <span className="text-white">Carbon Markets</span>
             </motion.h2>
-            <p className="text-[#94A3B8] max-w-xl mx-auto">
+            <p className="text-sm xs:text-base text-[#94A3B8] max-w-xl mx-auto">
               Our platform offers unique features that make carbon trading more accessible, transparent, and impactful.
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
-                className="feature-card-enhanced relative p-8 rounded-2xl 
+                className="feature-card-enhanced relative p-6 sm:p-8 rounded-2xl 
                            bg-gradient-to-br from-[#0F172A]/95 via-[#1E293B]/95 to-[#0F172A]/95
                            backdrop-blur-xl border border-[#76EAD7]/10
                            hover:border-[#76EAD7]/30 transition-all duration-500
@@ -294,7 +309,7 @@ const Landing = () => {
                 }}
               >
                 <motion.div 
-                  className="icon-glow relative w-16 h-16 mb-6 flex items-center justify-center"
+                  className="icon-glow relative w-14 h-14 mb-5 flex items-center justify-center"
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.5 }}
                 >
@@ -303,8 +318,8 @@ const Landing = () => {
                     {feature.icon}
                   </div>
                 </motion.div>
-                <h3 className="text-2xl font-bold mb-4 text-[#F8FAFC]">{feature.title}</h3>
-                <p className="text-[#94A3B8] text-base leading-relaxed">{feature.description}</p>
+                <h3 className="text-xl xs:text-2xl font-bold mb-3 sm:mb-4 text-[#F8FAFC]">{feature.title}</h3>
+                <p className="text-sm xs:text-base text-[#94A3B8] leading-relaxed">{feature.description}</p>
                 
                 {/* Enhanced gradient border and glow effects */}
                 <div className="absolute inset-0 rounded-2xl p-[1px] bg-gradient-to-br from-[#64ffda]/20 via-[#a8e6cf]/10 to-[#64ffda]/20 -z-10" />
@@ -322,7 +337,7 @@ const Landing = () => {
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-16 sm:py-24 relative overflow-hidden">
+      <section className="py-12 xs:py-16 sm:py-24 relative overflow-hidden">
         <motion.div 
           className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
           initial={{ opacity: 0, y: 30 }}
@@ -331,7 +346,7 @@ const Landing = () => {
           transition={{ duration: 0.7 }}
         >
           <motion.h2 
-            className="text-3xl sm:text-4xl font-bold mb-6 tracking-tight"
+            className="text-2xl xs:text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 tracking-tight"
             style={{
               textShadow: '0 0 20px rgba(118, 234, 215, 0.3), 0 0 40px rgba(196, 251, 109, 0.2)',
               filter: 'drop-shadow(0 0 8px rgba(118, 234, 215, 0.3))'
@@ -344,7 +359,7 @@ const Landing = () => {
             Ready to Make a <span className="gradient-text bg-clip-text animate-gradient">Difference</span>?
           </motion.h2>
           <motion.p 
-            className="text-[#94A3B8] text-base sm:text-lg max-w-xl mx-auto mb-8 sm:mb-10"
+            className="text-sm xs:text-base sm:text-lg text-[#94A3B8] max-w-xl mx-auto mb-6 sm:mb-10"
             style={{
               textShadow: '0 0 10px rgba(148, 163, 184, 0.3)'
             }}
@@ -355,6 +370,7 @@ const Landing = () => {
             whileHover={{ scale: 1.05 }} 
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            className="w-full xs:w-auto inline-block"
           >
             <Link 
               to="/dashboard" 
@@ -362,7 +378,7 @@ const Landing = () => {
             >
               <span className="absolute inset-0 bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] animate-gradient-shift"></span>
               <span className="absolute inset-[2px] bg-[#0F172A] rounded-lg"></span>
-              <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] font-bold">
+              <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] font-bold whitespace-nowrap">
                 Start Your Journey Today
               </span>
               <div className="absolute inset-0 rounded-lg opacity-0 hover:opacity-20 

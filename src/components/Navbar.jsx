@@ -137,7 +137,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Improved Styling */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -145,32 +145,51 @@ const Navbar = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden bg-[#0F172A]/95 backdrop-blur-lg border-b border-[#1E293B]"
+              className={`md:hidden m-2 mb-4 rounded-xl overflow-hidden ${
+                scrolled 
+                  ? 'bg-[#0F172A]/60 shadow-lg shadow-[#76EAD7]/5 border border-[#76EAD7]/10'
+                  : 'bg-[#0F172A]/40 border border-white/5'
+              } backdrop-blur-xl transition-all duration-300`}
             >
-              <div className="px-4 pt-2 pb-4 space-y-3">
+              <div className="px-4 pt-4 pb-6 flex flex-col items-center">
                 {navLinks.map((link) => (
                   <motion.div
                     key={link.name}
-                    whileHover={{ scale: 1.02, x: 10 }}
+                    whileHover={{ scale: 1.05 }}
                     transition={{ type: "spring", stiffness: 400 }}
+                    className="w-full"
                   >
                     <Link
                       to={link.path}
-                      className="block py-2 text-[#94A3B8] hover:text-white transition-colors"
+                      className={`block py-3 text-center text-lg transition-colors ${
+                        location.pathname === link.path
+                          ? 'text-[#76EAD7] font-medium'
+                          : 'text-[#94A3B8] hover:text-[#76EAD7]'
+                      }`}
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {link.name}
+                      {location.pathname === link.path && (
+                        <div className="h-0.5 w-16 mx-auto mt-1 bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D]" />
+                      )}
                     </Link>
                   </motion.div>
                 ))}
-                <div className="pt-2 space-y-3">
-                  <Link
-                    to="/dashboard"
-                    className="block w-full btn-primary text-center"
-                    onClick={() => setIsMenuOpen(false)}
+                <div className="w-full pt-5 pb-2">
+                  <motion.div
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
                   >
-                    Get Started
-                  </Link>
+                    <Link
+                      to="/dashboard"
+                      className="block w-full py-3 px-6 text-center text-base font-medium text-[#0F172A] 
+                        bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] rounded-xl 
+                        hover:shadow-[0_0_15px_rgba(118,234,215,0.4)] transition-all duration-300"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Get Started
+                    </Link>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
