@@ -232,7 +232,7 @@ const Landing = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1 }}
-              className="h-[250px] xs:h-[300px] sm:h-[400px] md:h-[560px] relative model-container order-1 lg:order-2 mt-4 sm:mt-6 md:mt-8"
+              className="h-[250px] xs:h-[300px] sm:h-[400px] md:h-[560px] relative model-container order-1 lg:order-2 mt-16 sm:mt-20 md:mt-16 lg:mt-8"
               style={{ 
                 transform: `translateY(${scrollY * -0.05}px)`,
                 transition: 'transform 0.2s ease-out'
