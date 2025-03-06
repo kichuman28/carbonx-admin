@@ -148,10 +148,10 @@ const Landing = () => {
                 animate={{ width: "150px" }}
                 transition={{ duration: 1.2, delay: 0.2 }}
                 className="h-1.5 bg-gradient-to-r from-[#76EAD7] via-[#C4FB6D] to-transparent mb-4 sm:mb-8 
-                          rounded-full"
+                          rounded-full mx-auto sm:mx-0"
               />
               <motion.h1 
-                className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 text-white leading-tight"
+                className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 text-white leading-tight text-center sm:text-left"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
