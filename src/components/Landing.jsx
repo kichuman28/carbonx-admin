@@ -181,7 +181,9 @@ const Landing = () => {
                   whileHover={{ scale: 1.05 }} 
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Link to="/dashboard" className="btn-primary">
+                  <Link to="/dashboard" className="inline-block px-8 py-3 bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] 
+                    text-[#0F172A] font-semibold rounded-xl hover:shadow-lg 
+                    hover:shadow-[#76EAD7]/30 transition-all duration-300">
                     Get Started
                   </Link>
                 </motion.div>
@@ -189,13 +191,17 @@ const Landing = () => {
                   whileHover={{ scale: 1.05 }} 
                   whileTap={{ scale: 0.95 }}
                 >
-                  <a href="#learn-more" onClick={(e) => { e.preventDefault(); document.getElementById('learn-more').scrollIntoView({ behavior: 'smooth' }); }} className="btn-secondary w-full sm:w-auto text-center relative z-10
-                    px-8 py-3 rounded-lg border-2 border-[#76EAD7] text-white font-semibold
-                    transition-all duration-300 bg-[#0F172A]/80 backdrop-blur-sm
-                    hover:bg-gradient-to-r hover:from-[#76EAD7]/20 hover:to-[#C4FB6D]/20
-                    hover:border-[#C4FB6D] hover:text-white
-                    hover:shadow-[0_0_20px_rgba(118,234,215,0.3)] overflow-hidden">
-                    <span className="relative z-10 flex items-center justify-center gap-2">
+                  <a href="#learn-more" 
+                    onClick={(e) => { 
+                      e.preventDefault(); 
+                      document.getElementById('learn-more').scrollIntoView({ behavior: 'smooth' }); 
+                    }} 
+                    className="inline-block w-full sm:w-auto text-center px-8 py-3 
+                      border-2 border-[#76EAD7] text-white font-semibold rounded-xl
+                      transition-all duration-300 bg-[#0F172A]/80 backdrop-blur-sm
+                      hover:bg-gradient-to-r hover:from-[#76EAD7]/20 hover:to-[#C4FB6D]/20
+                      hover:border-[#C4FB6D] hover:shadow-lg hover:shadow-[#76EAD7]/30">
+                    <span className="flex items-center justify-center gap-2">
                       Learn More
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -244,7 +250,6 @@ const Landing = () => {
 
       {/* Features Section - Enhanced */}
       <section id="learn-more" className="py-12 sm:py-20 relative">
-        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="text-center mb-16"
@@ -253,9 +258,17 @@ const Landing = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">
-              <span className="gradient-text">Revolutionizing</span> Carbon Markets
-            </h2>
+            <motion.h2 
+              className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              style={{
+                textShadow: '0 0 10px rgba(118, 234, 215, 0.5), 0 0 20px rgba(196, 251, 109, 0.3)',
+                filter: 'drop-shadow(0 0 8px rgba(118, 234, 215, 0.4))'
+              }}>
+              <span className="gradient-text">Revolutionizing</span>{' '}
+              <span className="text-white">Carbon Markets</span>
+            </motion.h2>
             <p className="text-[#94A3B8] max-w-xl mx-auto">
               Our platform offers unique features that make carbon trading more accessible, transparent, and impactful.
             </p>
@@ -317,23 +330,47 @@ const Landing = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            Ready to Make a <span className="gradient-text">Difference</span>?
-          </h2>
-          <p className="text-[#94A3B8] text-base sm:text-lg max-w-xl mx-auto mb-8 sm:mb-10">
+          <motion.h2 
+            className="text-3xl sm:text-4xl font-bold mb-6 tracking-tight"
+            style={{
+              textShadow: '0 0 20px rgba(118, 234, 215, 0.3), 0 0 40px rgba(196, 251, 109, 0.2)',
+              filter: 'drop-shadow(0 0 8px rgba(118, 234, 215, 0.3))'
+            }}
+            whileHover={{
+              scale: 1.02,
+              textShadow: '0 0 25px rgba(118, 234, 215, 0.4), 0 0 45px rgba(196, 251, 109, 0.3)'
+            }}
+          >
+            Ready to Make a <span className="gradient-text bg-clip-text animate-gradient">Difference</span>?
+          </motion.h2>
+          <motion.p 
+            className="text-[#94A3B8] text-base sm:text-lg max-w-xl mx-auto mb-8 sm:mb-10"
+            style={{
+              textShadow: '0 0 10px rgba(148, 163, 184, 0.3)'
+            }}
+          >
             Join thousands of individuals and organizations already making an impact on our planet through carbon credit trading.
-          </p>
+          </motion.p>
           <motion.div 
             whileHover={{ scale: 1.05 }} 
             whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            <Link to="/dashboard" className="btn-primary">
-              Start Your Journey Today
+            <Link 
+              to="/dashboard" 
+              className="relative inline-flex items-center px-8 py-3 rounded-lg font-semibold overflow-hidden transition-all duration-300"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] animate-gradient-shift"></span>
+              <span className="absolute inset-[2px] bg-[#0F172A] rounded-lg"></span>
+              <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] font-bold">
+                Start Your Journey Today
+              </span>
+              <div className="absolute inset-0 rounded-lg opacity-0 hover:opacity-20 
+                            bg-gradient-to-r from-[#76EAD7] to-[#C4FB6D] blur-xl transition-all duration-300"/>
             </Link>
           </motion.div>
         </motion.div>
-        
-        {/* Background Effect */}
+        {/* Enhanced Background Effects */}
         <motion.div 
           className="absolute bottom-0 left-0 w-full h-64 opacity-30 z-0"
           initial={{ opacity: 0 }}
@@ -341,7 +378,31 @@ const Landing = () => {
           viewport={{ once: true }}
           transition={{ duration: 1 }}
           style={{
-            background: 'linear-gradient(to top, rgba(118, 234, 215, 0.15), transparent)'
+            background: 'linear-gradient(to top, rgba(118, 234, 215, 0.25), transparent)',
+            filter: 'blur(40px)'
+          }}
+        />
+        
+        {/* Additional Decorative Elements */}
+        <motion.div
+          className="absolute top-0 right-0 w-72 h-72 opacity-20"
+          initial={{ opacity: 0, rotate: 0 }}
+          animate={{ opacity: 0.2, rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          style={{
+            background: 'radial-gradient(circle, rgba(196, 251, 109, 0.2) 0%, transparent 70%)',
+            filter: 'blur(40px)'
+          }}
+        />
+        
+        <motion.div
+          className="absolute bottom-20 left-20 w-48 h-48 opacity-20"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 0.2, scale: 1.2 }}
+          transition={{ duration: 4, repeat: Infinity, repeatType: "reverse" }}
+          style={{
+            background: 'radial-gradient(circle, rgba(118, 234, 215, 0.2) 0%, transparent 70%)',
+            filter: 'blur(30px)'
           }}
         />
       </section>
