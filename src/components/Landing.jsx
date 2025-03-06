@@ -359,20 +359,20 @@ const Landing = () => {
           transition={{ duration: 0.7 }}
         >
           <motion.h2 
-            className="text-2xl xs:text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 tracking-tight"
+            className="text-2xl xs:text-3xl sm:text-4xl font-bold mb-6 sm:mb-8"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
             style={{
-              textShadow: '0 0 20px rgba(118, 234, 215, 0.3), 0 0 40px rgba(196, 251, 109, 0.2)',
-              filter: 'drop-shadow(0 0 8px rgba(118, 234, 215, 0.3))'
-            }}
-            whileHover={{
-              scale: 1.02,
-              textShadow: '0 0 25px rgba(118, 234, 215, 0.4), 0 0 45px rgba(196, 251, 109, 0.3)'
+              textShadow: '0 0 10px rgba(118, 234, 215, 0.5), 0 0 20px rgba(196, 251, 109, 0.3)',
+              filter: 'drop-shadow(0 0 8px rgba(118, 234, 215, 0.4))',
+              fontSize: '2.5rem'
             }}
           >
-            Ready to Make a <span className="gradient-text bg-clip-text animate-gradient">Difference</span>?
+            Ready to Make a <br className="hidden xs:block" /> 
+            <span className="gradient-text bg-clip-text animate-gradient mt-4 xs:mt-2 inline-block">Difference</span>?
           </motion.h2>
           <motion.p 
-            className="text-sm xs:text-base sm:text-lg text-[#94A3B8] max-w-xl mx-auto mb-6 sm:mb-10"
+            className="text-lg xs:text-xl text-[#94A3B8] max-w-xl mx-auto mb-8 sm:mb-10 mt-4 xs:mt-0"
             style={{
               textShadow: '0 0 10px rgba(148, 163, 184, 0.3)'
             }}
@@ -383,7 +383,7 @@ const Landing = () => {
             whileHover={{ scale: 1.05 }} 
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            className="w-full xs:w-auto inline-block"
+            className="w-full xs:w-auto inline-block mt-1"
           >
             <Link 
               to="/dashboard" 
